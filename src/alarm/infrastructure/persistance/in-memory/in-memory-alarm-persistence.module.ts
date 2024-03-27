@@ -10,6 +10,6 @@ import { InMemoryAlarmRepository } from './repositories/alarm.repository';
       useClass: InMemoryAlarmRepository,
     },
   ],
-  exports: [InMemoryAlarmRepository],
+  exports: [AlarmRepository],
 })
 export class InMemoryAlarmPersistenceModule {}

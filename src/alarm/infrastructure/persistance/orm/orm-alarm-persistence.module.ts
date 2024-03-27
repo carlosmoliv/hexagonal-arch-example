@@ -12,6 +12,6 @@ import { AlarmRepository } from '../../../application/ports/alarm.repository';
       useClass: OrmAlarmRepository,
     },
   ],
-  exports: [OrmAlarmRepository],
+  exports: [AlarmRepository],
 })
 export class OrmAlarmPersistenceModule {}
