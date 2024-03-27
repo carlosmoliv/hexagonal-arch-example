@@ -3,7 +3,7 @@ import { AlarmService } from '../../application/alarm.service';
 import { CreateAlarmDto } from './dto/create-alarm.dto';
 import { CreateAlarmCommand } from '../../application/commands/create-alarm.command';
 
-@Controller('alarm')
+@Controller('alarms')
 export class AlarmController {
   constructor(private readonly alarmService: AlarmService) {}
 
