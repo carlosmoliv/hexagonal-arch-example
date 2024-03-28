@@ -7,3 +7,10 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pass123
+  read-db:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_DATABASE:"vf-read-db"
