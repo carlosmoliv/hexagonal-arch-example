@@ -10,7 +10,7 @@ export class AlarmMapper {
     return new Alarm(alarmEntity.id, alarmEntity.name, alarmSeverity);
   }
 
-  static toPersistance(alarm: Alarm) {
+  static toPersistence(alarm: Alarm) {
     const entity = new AlarmEntity();
     entity.id = alarm.id;
     entity.name = alarm.name;
