@@ -19,7 +19,7 @@ export class OrmAlarmRepository implements AlarmRepository {
   }
 
   async save(alarm: Alarm): Promise<Alarm> {
-    const persistenceModel = AlarmMapper.toPersistance(alarm);
+    const persistenceModel = AlarmMapper.toPersistence(alarm);
     const newEntity = await this.alarmRepository.save(persistenceModel);
     return AlarmMapper.toDomain(newEntity);
   }
