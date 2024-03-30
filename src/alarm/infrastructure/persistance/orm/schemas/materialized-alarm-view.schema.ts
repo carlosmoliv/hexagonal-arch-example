@@ -11,8 +11,22 @@ export class MaterializedAlarmView {
   @Prop()
   severity: string;
 
-  @Prop(raw([{ id: String, name: String, type: { type: String } }]))
-  items: Array<{ id: string; name: string; type: string }>;
+  @Prop(
+    raw([
+      {
+        id: String,
+        name: String,
+        type: {
+          type: String,
+        },
+      },
+    ]),
+  )
+  items: Array<{
+    id: string;
+    name: string;
+    type: string;
+  }>;
 }
 
 export const MaterializedAlarmViewSchema = SchemaFactory.createForClass(
