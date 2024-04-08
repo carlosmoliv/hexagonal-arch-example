@@ -15,6 +15,9 @@ export class AlarmCreatedEventHandler
 
   async handle(event: AlarmCreatedEvent) {
     this.logger.log(`Alarm created event: ${JSON.stringify(event)}`);
+
+    // TODO: Implement a message broker to avoid inconsistency between the AlarmReadModel and the creation of an Alarm
+    // Check Transactional inbox/outbox pattern
     await this.upsertMaterializedRepository.upsert({
       id: event.alarm.id,
       name: event.alarm.name,
