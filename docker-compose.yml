@@ -2,25 +2,22 @@ version: "3.8"
 services:
   write-db:
     image: postgres
-    restart: always
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pass123
   read-db:
     image: mongo
-    restart: always
     ports:
       - "27017:27017"
     environment:
       - MONGODB_DATABASE:"vf-read-db"
   event-store:
     image: mongo:6.0.4
-    restart: always
     ports:
       - "27018:27017"
     environment:
-      - MONGODB_DATABASE:"vf-event-store"
+      - MONGODB_DATABASE="vf-event-store"
     command: mongod --replSet vf-event-store-repl-set
     volumes:
       - ./scripts/event-store-mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro

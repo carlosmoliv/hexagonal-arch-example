@@ -6,7 +6,7 @@ import { EVENT_STORE_CONNECTION } from './core.constants';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/vf-event-store', {
+    MongooseModule.forRoot('mongodb://localhost:27018/vf-event-store', {
       connectionName: EVENT_STORE_CONNECTION,
       directConnection: true,
     }),
