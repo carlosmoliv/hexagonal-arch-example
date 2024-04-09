@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Event } from './schemas/event.schema';
 import { EVENT_STORE_CONNECTION } from '../../../core/core.constants';
-import { ISerializableEvent } from '../../domain/interfaces/serializable-event';
+import { SerializableEvent } from '../../domain/interfaces/serializable-event';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class MongoEventStore {
   ) {}
 
   async persist(
-    eventOrEvents: ISerializableEvent | ISerializableEvent[],
+    eventOrEvents: SerializableEvent | SerializableEvent[],
   ): Promise<void> {
     const events = Array.isArray(eventOrEvents)
       ? eventOrEvents

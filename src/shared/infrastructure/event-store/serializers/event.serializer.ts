@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ISerializableEvent } from '../../../domain/interfaces/serializable-event';
+import { SerializableEvent } from '../../../domain/interfaces/serializable-event';
 import { VersionedAggregateRoot } from '../../../domain/aggregate-root';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class EventSerializer {
   serialize<T>(
     event: T,
     dispatcher: VersionedAggregateRoot,
-  ): ISerializableEvent<T> {
+  ): SerializableEvent<T> {
     const eventType = event.constructor?.name;
     if (!eventType) throw new Error('Incompatible event type');
     const aggregateId = dispatcher.id;
