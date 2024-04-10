@@ -11,6 +11,9 @@ export class MaterializedAlarmView {
   @Prop()
   severity: string;
 
+  @Prop()
+  isAcknowledge: boolean;
+
   @Prop(
     raw([
       {

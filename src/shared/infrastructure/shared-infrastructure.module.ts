@@ -7,6 +7,7 @@ import { EventStorePublisher } from './event-store/publishers/event-store.publis
 import { MongoEventStore } from './event-store/mongo-event-store';
 import { EventDeserializer } from './event-store/deserializers/event.deserializer';
 import { EventsBridge } from './event-store/events-bridge';
+import { EventStore } from '../application/ports/event-store';
 
 @Module({
   imports: [
@@ -21,6 +22,11 @@ import { EventsBridge } from './event-store/events-bridge';
     MongoEventStore,
     EventsBridge,
     EventDeserializer,
+    {
+      provide: EventStore,
+      useExisting: MongoEventStore,
+    },
   ],
+  exports: [EventStore],
 })
 export class SharedInfrastructureModule {}

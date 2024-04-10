@@ -4,14 +4,17 @@ import { Event } from './schemas/event.schema';
 import { EVENT_STORE_CONNECTION } from '../../../core/core.constants';
 import { SerializableEvent } from '../../domain/interfaces/serializable-event';
 import { Model } from 'mongoose';
+import { EventDeserializer } from './deserializers/event.deserializer';
+import { EventStore } from '../../application/ports/event-store';
 
 @Injectable()
-export class MongoEventStore {
+export class MongoEventStore implements EventStore {
   private readonly logger = new Logger(MongoEventStore.name);
 
   constructor(
     @InjectModel(Event.name, EVENT_STORE_CONNECTION)
     private readonly eventStore: Model<Event>,
+    private readonly eventDeserializer: EventDeserializer,
   ) {}
 
   async persist(
@@ -38,5 +41,17 @@ export class MongoEventStore {
     } finally {
       await session.endSession();
     }
+  }
+
+  async getEventsByStreamId(streamId: string): Promise<SerializableEvent[]> {
+    const events = await this.eventStore
+      .find({ streamId })
+      .sort({ position: 1 });
+    if (events.length === 0) {
+      throw new Error(`Aggregate with id ${streamId} does not exist`);
+    }
+    return events.map((event) =>
+      this.eventDeserializer.deserialize(event.toJSON()),
+    );
   }
 }
