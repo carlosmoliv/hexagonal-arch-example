@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   write-db:
     image: postgres
@@ -9,13 +9,13 @@ services:
   read-db:
     image: mongo
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
-      - MONGODB_DATABASE:"vf-read-db"
+      - MONGODB_DATABASE="vf-read-db"
   event-store:
     image: mongo:6.0.4
     ports:
-      - "27018:27017"
+      - '27018:27017'
     environment:
       - MONGODB_DATABASE="vf-event-store"
     command: mongod --replSet vf-event-store-repl-set
