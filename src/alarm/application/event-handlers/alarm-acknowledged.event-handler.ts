@@ -2,11 +2,11 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
 import { UpsertMaterializedAlarmRepository } from '../ports/upsert-materialized-alarm.repository';
 import { SerializedEventPayload } from '../../../shared/domain/interfaces/serializable-event';
-import { AlarmAcknowledgeEvent } from '../../domain/events/alarm-acknowledge.event';
+import { AlarmAcknowledgedEvent } from '../../domain/events/alarm-acknowledged.event';
 
-@EventsHandler(AlarmAcknowledgeEvent)
+@EventsHandler(AlarmAcknowledgedEvent)
 export class AlarmAcknowledgeEventHandler
-  implements IEventHandler<SerializedEventPayload<AlarmAcknowledgeEvent>>
+  implements IEventHandler<SerializedEventPayload<AlarmAcknowledgedEvent>>
 {
   private readonly logger = new Logger(AlarmAcknowledgeEventHandler.name);
 
@@ -14,7 +14,7 @@ export class AlarmAcknowledgeEventHandler
     private readonly upsertMaterializedRepository: UpsertMaterializedAlarmRepository,
   ) {}
 
-  async handle(event: SerializedEventPayload<AlarmAcknowledgeEvent>) {
+  async handle(event: SerializedEventPayload<AlarmAcknowledgedEvent>) {
     this.logger.log(`Alarm acknowledge event: ${JSON.stringify(event)}`);
     await this.upsertMaterializedRepository.upsert({
       id: event.alarmId,

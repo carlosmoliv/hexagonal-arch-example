@@ -1,6 +1,6 @@
 import { AutowiredEvent } from '../../../shared/decorators/autowired-event.decorator';
 
 @AutowiredEvent
-export class AlarmAcknowledgeEvent {
+export class AlarmAcknowledgedEvent {
   constructor(public readonly alarmId: string) {}
 }

@@ -1,7 +1,7 @@
 import { AlarmSeverity } from './value-objects/alarm-severity';
 import { AlarmItem } from './alarm-item';
 import { VersionedAggregateRoot } from '../../shared/domain/aggregate-root';
-import { AlarmAcknowledgeEvent } from './events/alarm-acknowledge.event';
+import { AlarmAcknowledgedEvent } from './events/alarm-acknowledged.event';
 import { SerializedEventPayload } from '../../shared/domain/interfaces/serializable-event';
 import { AlarmCreatedEvent } from './events/alarm-created.event';
 
@@ -17,7 +17,7 @@ export class Alarm extends VersionedAggregateRoot {
   }
 
   acknowledge() {
-    this.apply(new AlarmAcknowledgeEvent(this.id));
+    this.apply(new AlarmAcknowledgedEvent(this.id));
   }
 
   addAlarmItem(item: AlarmItem) {
@@ -36,8 +36,8 @@ export class Alarm extends VersionedAggregateRoot {
     );
   }
 
-  [`on${AlarmAcknowledgeEvent.name}`](
-    event: SerializedEventPayload<AlarmAcknowledgeEvent>,
+  [`on${AlarmAcknowledgedEvent.name}`](
+    event: SerializedEventPayload<AlarmAcknowledgedEvent>,
   ) {
     if (this.isAcknowledge)
       throw new Error('Alarm has already been acknowledge.');
